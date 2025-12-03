@@ -27,7 +27,7 @@
 </style>
 </head>
 <body>
-<h1>Diciembre 2025</h1>
+<h1>Calendario de Citas BonitaStudio Dicembre 2025</h1>
 
 <div id="main-container">
   <div class="calendar">
@@ -244,6 +244,10 @@ function updateStats() {
   let reservedMinutes = 0;
   let attendedMinutes = 0;
   let canceledMinutes = 0;
+  
+  let reservedCount = 0;
+  let attendedCount = 0;
+  let canceledCount = 0;
 
   for (let i = 1; i <= 31; i++) {
     const date = `2025-12-${String(i).padStart(2, '0')}`;
@@ -253,10 +257,13 @@ function updateStats() {
         const duration = toMinutes(cita.fin) - toMinutes(cita.inicio);
         if(cita.estado === 'asistida') {
           attendedMinutes += duration;
+          attendedCount++;
         } else if (cita.estado === 'cancelada') {
           canceledMinutes += duration;
+          canceledCount++;
         } else { // 'reservada'
           reservedMinutes += duration;
+          reservedCount++;
         }
       });
     }
@@ -265,21 +272,26 @@ function updateStats() {
   const freeMinutes = totalMinutesInMonth - (reservedMinutes + attendedMinutes + canceledMinutes);
 
   const data = {
-    labels: ['Citas Reservadas', 'Tiempo Libre', 'Citas Asistidas', 'Citas Canceladas'],
+    labels: [
+        `Citas Reservadas (${reservedCount})`, 
+        'Tiempo Libre', 
+        `Citas Asistidas (${attendedCount})`, 
+        `Citas Canceladas (${canceledCount})`
+    ],
     datasets: [{
       label: 'Distribución del Tiempo',
       data: [reservedMinutes, freeMinutes, attendedMinutes, canceledMinutes],
       backgroundColor: [
-        'rgba(255, 159, 64, 0.7)', // Naranja para Reservadas
-        'rgba(75, 192, 192, 0.7)', // Verde-azulado para Libre
-        'rgba(54, 162, 235, 0.7)', // Azul para Asistidas
-        'rgba(255, 99, 132, 0.7)'  // Rojo para Canceladas
+        'rgba(255, 165, 0, 0.7)', // Amarillo-Naranja para Reservadas
+        'rgba(139, 195, 74, 0.7)', // Verde Manzana para Libre
+        'rgba(0, 0, 128, 0.7)',   // Azul Marino para Asistidas
+        'rgba(204, 0, 0, 0.7)'     // Rojo Intenso para Canceladas
       ],
       borderColor: [
-        'rgba(255, 159, 64, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 99, 132, 1)'
+        'rgba(255, 165, 0, 1)',
+        'rgba(139, 195, 74, 1)',
+        'rgba(0, 0, 128, 1)',
+        'rgba(204, 0, 0, 1)'
       ],
       borderWidth: 1
     }]
@@ -298,10 +310,17 @@ function updateStats() {
       responsive: true,
       plugins: {
         legend: {
-          position: 'top',
+          position: 'left',
+          align: 'start',
+          labels: {
+            font: {
+              size: 14,
+              weight: 'bold'
+            }
+          }
         },
         title: {
-          display: true,
+          display: false,
           text: 'Distribución de Tiempo en Diciembre'
         },
         tooltip: {
@@ -309,6 +328,7 @@ function updateStats() {
             label: function(context) {
               let label = context.label || '';
               if (label) {
+                label = label.split('(')[0].trim(); // Remove count for tooltip
                 label += ': ';
               }
               const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
