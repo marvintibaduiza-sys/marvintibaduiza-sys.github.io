@@ -3,13 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Calendario Diciembre 2025</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   body { font-family: Arial, sans-serif; background:#f8f8f8; }
   h1 { text-align:center; color:#2d6a4f; }
-  .calendar { width:80%; margin:0 auto; display:grid; grid-template-columns: repeat(7,1fr); gap:5px; }
+  
+  #main-container { display: flex; justify-content: space-around; align-items: flex-start; width: 95%; margin: 0 auto; }
+
+  .calendar { width: 65%; display:grid; grid-template-columns: repeat(7,1fr); gap:5px; }
   .day-name { background:#2d6a4f; color:#fff; padding:10px; text-align:center; font-weight:bold; border-radius:5px; }
   .day { background:#fff; border:1px solid #ccc; padding:20px; height:80px; cursor:pointer; border-radius:5px; transition:0.2s; }
   .day:hover { background:#e6ffe6; }
+
+  #stats-container { width: 30%; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+  #stats-container h2 { text-align: center; color: #2d6a4f; }
 
   /* Modal */
   .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
@@ -22,49 +29,56 @@
 <body>
 <h1>Diciembre 2025</h1>
 
-<div class="calendar">
-  <div class="day-name">Lunes</div><div class="day-name">Martes</div><div class="day-name">Miércoles</div><div class="day-name">Jueves</div><div class="day-name">Viernes</div><div class="day-name">Sábado</div><div class="day-name">Domingo</div>
+<div id="main-container">
+  <div class="calendar">
+    <div class="day-name">Lunes</div><div class="day-name">Martes</div><div class="day-name">Miércoles</div><div class="day-name">Jueves</div><div class="day-name">Viernes</div><div class="day-name">Sábado</div><div class="day-name">Domingo</div>
 
-  <!-- Semana 1 -->
-  <div class="day" data-date="2025-12-01">1</div>
-  <div class="day" data-date="2025-12-02">2</div>
-  <div class="day" data-date="2025-12-03">3</div>
-  <div class="day" data-date="2025-12-04">4</div>
-  <div class="day" data-date="2025-12-05">5</div>
-  <div class="day" data-date="2025-12-06">6</div>
-  <div class="day" data-date="2025-12-07">7</div>
+    <!-- Semana 1 -->
+    <div class="day" data-date="2025-12-01">1</div>
+    <div class="day" data-date="2025-12-02">2</div>
+    <div class="day" data-date="2025-12-03">3</div>
+    <div class="day" data-date="2025-12-04">4</div>
+    <div class="day" data-date="2025-12-05">5</div>
+    <div class="day" data-date="2025-12-06">6</div>
+    <div class="day" data-date="2025-12-07">7</div>
 
-  <!-- Semana 2 -->
-  <div class="day" data-date="2025-12-08">8</div>
-  <div class="day" data-date="2025-12-09">9</div>
-  <div class="day" data-date="2025-12-10">10</div>
-  <div class="day" data-date="2025-12-11">11</div>
-  <div class="day" data-date="2025-12-12">12</div>
-  <div class="day" data-date="2025-12-13">13</div>
-  <div class="day" data-date="2025-12-14">14</div>
+    <!-- Semana 2 -->
+    <div class="day" data-date="2025-12-08">8</div>
+    <div class="day" data-date="2025-12-09">9</div>
+    <div class="day" data-date="2025-12-10">10</div>
+    <div class="day" data-date="2025-12-11">11</div>
+    <div class="day" data-date="2025-12-12">12</div>
+    <div class="day" data-date="2025-12-13">13</div>
+    <div class="day" data-date="2025-12-14">14</div>
 
-  <!-- Semana 3 -->
-  <div class="day" data-date="2025-12-15">15</div>
-  <div class="day" data-date="2025-12-16">16</div>
-  <div class="day" data-date="2025-12-17">17</div>
-  <div class="day" data-date="2025-12-18">18</div>
-  <div class="day" data-date="2025-12-19">19</div>
-  <div class="day" data-date="2025-12-20">20</div>
-  <div class="day" data-date="2025-12-21">21</div>
+    <!-- Semana 3 -->
+    <div class="day" data-date="2025-12-15">15</div>
+    <div class="day" data-date="2025-12-16">16</div>
+    <div class="day" data-date="2025-12-17">17</div>
+    <div class="day" data-date="2025-12-18">18</div>
+    <div class="day" data-date="2025-12-19">19</div>
+    <div class="day" data-date="2025-12-20">20</div>
+    <div class="day" data-date="2025-12-21">21</div>
 
-  <!-- Semana 4 -->
-  <div class="day" data-date="2025-12-22">22</div>
-  <div class="day" data-date="2025-12-23">23</div>
-  <div class="day" data-date="2025-12-24">24</div>
-  <div class="day" data-date="2025-12-25">25</div>
-  <div class="day" data-date="2025-12-26">26</div>
-  <div class="day" data-date="2025-12-27">27</div>
-  <div class="day" data-date="2025-12-28">28</div>
+    <!-- Semana 4 -->
+    <div class="day" data-date="2025-12-22">22</div>
+    <div class="day" data-date="2025-12-23">23</div>
+    <div class="day" data-date="2025-12-24">24</div>
+    <div class="day" data-date="2025-12-25">25</div>
+    <div class="day" data-date="2025-12-26">26</div>
+    <div class="day" data-date="2025-12-27">27</div>
+    <div class="day" data-date="2025-12-28">28</div>
 
-  <!-- Semana 5 -->
-  <div class="day" data-date="2025-12-29">29</div>
-  <div class="day" data-date="2025-12-30">30</div>
-  <div class="day" data-date="2025-12-31">31</div>
+    <!-- Semana 5 -->
+    <div class="day" data-date="2025-12-29">29</div>
+    <div class="day" data-date="2025-12-30">30</div>
+    <div class="day" data-date="2025-12-31">31</div>
+  </div>
+
+  <div id="stats-container">
+    <h2>Estadísticas Mensuales</h2>
+    <canvas id="stats-chart"></canvas>
+  </div>
 </div>
 
 <!-- Modal -->
@@ -80,145 +94,237 @@
 // Citas precargadas
 const schedule = {
   "2025-12-01": { citas:[
-    {inicio:"10:00", fin:"12:00", cliente:"Amiga de Mirel"},
-    {inicio:"14:00", fin:"15:30", cliente:"Cliente"},
-    {inicio:"19:30", fin:"20:30", cliente:"Dafne"}
+    {inicio:"10:00", fin:"12:00", cliente:"Amiga de Mirel", estado:"reservada"},
+    {inicio:"14:00", fin:"15:30", cliente:"Cliente", estado:"reservada"},
+    {inicio:"19:30", fin:"20:30", cliente:"Dafne", estado:"reservada"}
   ]},
   "2025-12-02": { citas:[
-    {inicio:"19:00", fin:"20:30", cliente:"Alondra"},
-    {inicio:"11:00", fin:"12:30", cliente:"Carmen Lara"}
+    {inicio:"19:00", fin:"20:30", cliente:"Alondra", estado:"reservada"},
+    {inicio:"11:00", fin:"12:30", cliente:"Carmen Lara", estado:"reservada"}
   ]},
   "2025-12-03": { citas:[
-    {inicio:"13:00", fin:"15:00", cliente:"Alondra"},
-    {inicio:"08:30", fin:"10:00", cliente:"Jocabed Nailuma"},
-    {inicio:"17:00", fin:"18:30", cliente:"Eva Barajas"}
+    {inicio:"13:00", fin:"15:00", cliente:"Alondra", estado:"reservada"},
+    {inicio:"08:30", fin:"10:00", cliente:"Jocabed Nailuma", estado:"reservada"},
+    {inicio:"17:00", fin:"18:30", cliente:"Eva Barajas", estado:"reservada"}
   ]},
   "2025-12-04": { citas:[
-    {inicio:"10:00", fin:"12:00", cliente:"Hija de Ana"},
-    {inicio:"13:15", fin:"14:15", cliente:"Profe Norma"},
-    {inicio:"16:00", fin:"17:30", cliente:"Lili"},
-    {inicio:"17:30", fin:"19:30", cliente:"sonia acrilicas"}
+    {inicio:"10:00", fin:"12:00", cliente:"Hija de Ana", estado:"reservada"},
+    {inicio:"13:15", fin:"14:15", cliente:"Profe Norma", estado:"reservada"},
+    {inicio:"16:00", fin:"17:30", cliente:"Lili", estado:"reservada"},
+    {inicio:"17:30", fin:"19:30", cliente:"sonia acrilicas", estado:"reservada"}
   ]},
   "2025-12-05": { citas:[
-    {inicio:"13:00", fin:"14:30", cliente:"Profe Norma"},
-    {inicio:"15:00", fin:"17:00", cliente:"Mamá de Matilda"},
-    {inicio:"19:00", fin:"20:30", cliente:"alex pestañas hibridas"},
-    {inicio:"08:00", fin:"09:30", cliente:"Pestañas Gaby"},
-    {inicio:"11:00", fin:"12:30", cliente:"Marbella Uñas Acrilicas"}
+    {inicio:"13:00", fin:"14:30", cliente:"Profe Norma", estado:"reservada"},
+    {inicio:"15:00", fin:"17:00", cliente:"Mamá de Matilda", estado:"reservada"},
+    {inicio:"19:00", fin:"20:30", cliente:"alex pestañas hibridas", estado:"reservada"},
+    {inicio:"08:00", fin:"09:30", cliente:"Pestañas Gaby", estado:"reservada"},
+    {inicio:"11:00", fin:"12:30", cliente:"Marbella Uñas Acrilicas", estado:"reservada"}
   ]},
   "2025-12-06": { citas:[
-    {inicio:"08:30", fin:"09:30", cliente:"Leu"},
-    {inicio:"13:00", fin:"15:00", cliente:"Hija de Sandra"}
+    {inicio:"08:30", fin:"09:30", cliente:"Leu", estado:"reservada"},
+    {inicio:"13:00", fin:"15:00", cliente:"Hija de Sandra", estado:"reservada"}
   ]},
   "2025-12-07": { citas:[
-    {inicio:"12:00", fin:"14:00", cliente:"Cliente"}
+    {inicio:"12:00", fin:"14:00", cliente:"Cliente", estado:"reservada"}
   ]},
   "2025-12-08": { citas:[
-    {inicio:"14:00", fin:"16:00", cliente:"Brenda"},
-    {inicio:"16:00", fin:"18:30", cliente:"Hija de Sofía"}
+    {inicio:"14:00", fin:"16:00", cliente:"Brenda", estado:"reservada"},
+    {inicio:"16:00", fin:"18:30", cliente:"Hija de Sofía", estado:"reservada"}
   ]},
   "2025-12-09": { citas:[
-    {inicio:"14:00", fin:"17:00", cliente:"Mamá de Tania"}
+    {inicio:"14:00", fin:"17:00", cliente:"Mamá de Tania", estado:"reservada"}
   ]},
   "2025-12-10": { citas:[
-    {inicio:"09:00", fin:"10:30", cliente:"Uñas en gel"},
-    {inicio:"09:00", fin:"10:00", cliente:"Alejandra"},
-    {inicio:"11:00", fin:"12:30", cliente:"Prima de Cris"},
-    {inicio:"15:00", fin:"16:30", cliente:"Mamá de Tai"},
-    {inicio:"16:00", fin:"18:00", cliente:"Tai"}
+    {inicio:"09:00", fin:"10:30", cliente:"Uñas en gel", estado:"reservada"},
+    {inicio:"09:00", fin:"10:00", cliente:"Alejandra", estado:"reservada"},
+    {inicio:"11:00", fin:"12:30", cliente:"Prima de Cris", estado:"reservada"},
+    {inicio:"15:00", fin:"16:30", cliente:"Mamá de Tai", estado:"reservada"},
+    {inicio:"16:00", fin:"18:00", cliente:"Tai", estado:"reservada"}
   ]},
   "2025-12-11": { citas:[
-    {inicio:"11:00", fin:"12:00", cliente:"Mamá de Profe Ofelia"},
-    {inicio:"13:00", fin:"16:00", cliente:"Ivonne y mamá"},
-    {inicio:"16:30", fin:"17:30", cliente:"Profe Ofelia"},
-    {inicio:"18:00", fin:"19:00", cliente:"Mamá de Nani"},
-    {inicio:"19:00", fin:"21:00", cliente:"Hija de Sandra Ceci"}
+    {inicio:"11:00", fin:"12:00", cliente:"Mamá de Profe Ofelia", estado:"reservada"},
+    {inicio:"13:00", fin:"16:00", cliente:"Ivonne y mamá", estado:"reservada"},
+    {inicio:"16:30", fin:"17:30", cliente:"Profe Ofelia", estado:"reservada"},
+    {inicio:"18:00", fin:"19:00", cliente:"Mamá de Nani", estado:"reservada"},
+    {inicio:"19:00", fin:"21:00", cliente:"Hija de Sandra Ceci", estado:"reservada"}
   ]},
   "2025-12-12": { citas:[
-    {inicio:"08:00", fin:"11:00", cliente:"Valguera mamá e hija"},
-    {inicio:"11:30", fin:"13:30", cliente:"Gaby"},
-    {inicio:"13:30", fin:"14:30", cliente:"Profe Maribel"},
-    {inicio:"15:00", fin:"18:00", cliente:"Señora Margarita"}
+    {inicio:"08:00", fin:"11:00", cliente:"Valguera mamá e hija", estado:"reservada"},
+    {inicio:"11:30", fin:"13:30", cliente:"Gaby", estado:"reservada"},
+    {inicio:"13:30", fin:"14:30", cliente:"Profe Maribel", estado:"reservada"},
+    {inicio:"15:00", fin:"18:00", cliente:"Señora Margarita", estado:"reservada"}
   ]},
   "2025-12-13": { citas:[
-    {inicio:"08:00", fin:"11:00", cliente:"Profe América"},
-    {inicio:"11:00", fin:"14:00", cliente:"Profe Luis"},
-    {inicio:"14:30", fin:"16:00", cliente:"Señora Sandra"},
-    {inicio:"16:00", fin:"17:30", cliente:"Hija Sra Sandra"},
-    {inicio:"18:00", fin:"20:00", cliente:"Señora Ale"}
+    {inicio:"08:00", fin:"11:00", cliente:"Profe América", estado:"reservada"},
+    {inicio:"11:00", fin:"14:00", cliente:"Profe Luis", estado:"reservada"},
+    {inicio:"14:30", fin:"16:00", cliente:"Señora Sandra", estado:"reservada"},
+    {inicio:"16:00", fin:"17:30", cliente:"Hija Sra Sandra", estado:"reservada"},
+    {inicio:"18:00", fin:"20:00", cliente:"Señora Ale", estado:"reservada"}
   ]},
   "2025-12-14": { citas:[
-    {inicio:"08:00", fin:"13:00", cliente:"Señora Santa e hijas"},
-    {inicio:"14:00", fin:"15:30", cliente:"Profe Very"},
-    {inicio:"15:30", fin:"18:30", cliente:"Bere"}
+    {inicio:"08:00", fin:"13:00", cliente:"Señora Santa e hijas", estado:"reservada"},
+    {inicio:"14:00", fin:"15:30", cliente:"Profe Very", estado:"reservada"},
+    {inicio:"15:30", fin:"18:30", cliente:"Bere", estado:"reservada"}
   ]},
   "2025-12-15": { citas:[
-    {inicio:"08:00", fin:"09:30", cliente:"Señora Michi"},
-    {inicio:"10:00", fin:"13:00", cliente:"Adriana"},
-    {inicio:"15:00", fin:"19:00", cliente:"Profe Lili"}
+    {inicio:"08:00", fin:"09:30", cliente:"Señora Michi", estado:"reservada"},
+    {inicio:"10:00", fin:"13:00", cliente:"Adriana", estado:"reservada"},
+    {inicio:"15:00", fin:"19:00", cliente:"Profe Lili", estado:"reservada"}
   ]},
   "2025-12-16": { citas:[
-    {inicio:"11:00", fin:"12:00", cliente:"Profe Carmen"},
-    {inicio:"13:00", fin:"16:00", cliente:"Señora Juana"},
-    {inicio:"16:00", fin:"17:00", cliente:"Señora Claudia"},
-    {inicio:"17:00", fin:"18:30", cliente:"Abuela Ana"},
-    {inicio:"18:30", fin:"20:30", cliente:"Ana"}
+    {inicio:"11:00", fin:"12:00", cliente:"Profe Carmen", estado:"reservada"},
+    {inicio:"13:00", fin:"16:00", cliente:"Señora Juana", estado:"reservada"},
+    {inicio:"16:00", fin:"17:00", cliente:"Señora Claudia", estado:"reservada"},
+    {inicio:"17:00", fin:"18:30", cliente:"Abuela Ana", estado:"reservada"},
+    {inicio:"18:30", fin:"20:30", cliente:"Ana", estado:"reservada"}
   ]},
   "2025-12-17": { citas:[
-    {inicio:"10:00", fin:"12:00", cliente:"Cliente"},
-    {inicio:"13:00", fin:"16:00", cliente:"Señora Juana"},
-    {inicio:"16:00", fin:"17:00", cliente:"Señora Claudia"},
-    {inicio:"17:00", fin:"18:00", cliente:"Tai"},
-    {inicio:"18:00", fin:"19:00", cliente:"Bricia"},
-    {inicio:"19:00", fin:"20:00", cliente:"Dafne"}
+    {inicio:"10:00", fin:"12:00", cliente:"Cliente", estado:"reservada"},
+    {inicio:"13:00", fin:"16:00", cliente:"Señora Juana", estado:"reservada"},
+    {inicio:"16:00", fin:"17:00", cliente:"Señora Claudia", estado:"reservada"},
+    {inicio:"17:00", fin:"18:00", cliente:"Tai", estado:"reservada"},
+    {inicio:"18:00", fin:"19:00", cliente:"Bricia", estado:"reservada"},
+    {inicio:"19:00", fin:"20:00", cliente:"Dafne", estado:"reservada"}
   ]},
   "2025-12-18": { citas:[
-    {inicio:"08:00", fin:"10:00", cliente:"Katy"},
-    {inicio:"10:30", fin:"12:00", cliente:"Daniela"},
-    {inicio:"13:00", fin:"14:30", cliente:"Arlette"},
-    {inicio:"15:00", fin:"17:30", cliente:"Romi"},
-    {inicio:"18:00", fin:"19:00", cliente:"Dafne"},
-    {inicio:"19:30", fin:"21:00", cliente:"Jessie"}
+    {inicio:"08:00", fin:"10:00", cliente:"Katy", estado:"reservada"},
+    {inicio:"10:30", fin:"12:00", cliente:"Daniela", estado:"reservada"},
+    {inicio:"13:00", fin:"14:30", cliente:"Arlette", estado:"reservada"},
+    {inicio:"15:00", fin:"17:30", cliente:"Romi", estado:"reservada"},
+    {inicio:"18:00", fin:"19:00", cliente:"Dafne", estado:"reservada"},
+    {inicio:"19:30", fin:"21:00", cliente:"Jessie", estado:"reservada"}
   ]},
   "2025-12-19": { citas:[
-    {inicio:"08:30", fin:"12:00", cliente:"Tania"},
-    {inicio:"13:30", fin:"14:30", cliente:"Bola de Ceci"},
-    {inicio:"15:00", fin:"16:30", cliente:"Evi"},
-    {inicio:"16:30", fin:"18:30", cliente:"Prima de Alex"},
-    {inicio:"18:30", fin:"20:30", cliente:"Alex"},
-    {inicio:"20:00", fin:"21:00", cliente:"Amiga de Dafne"}
+    {inicio:"08:30", fin:"12:00", cliente:"Tania", estado:"reservada"},
+    {inicio:"13:30", fin:"14:30", cliente:"Bola de Ceci", estado:"reservada"},
+    {inicio:"15:00", fin:"16:30", cliente:"Evi", estado:"reservada"},
+    {inicio:"16:30", fin:"18:30", cliente:"Prima de Alex", estado:"reservada"},
+    {inicio:"18:30", fin:"20:30", cliente:"Alex", estado:"reservada"},
+    {inicio:"20:00", fin:"21:00", cliente:"Amiga de Dafne", estado:"reservada"}
   ]},
   "2025-12-20": { citas:[
-    {inicio:"08:00", fin:"09:30", cliente:"Señora Mayela"},
-    {inicio:"09:30", fin:"10:30", cliente:"Gaby"},
-    {inicio:"11:00", fin:"13:30", cliente:"Señora Carmen"},
-    {inicio:"14:00", fin:"17:00", cliente:"Ashley"},
-    {inicio:"18:00", fin:"20:30", cliente:"Hija Profe Alexa"}
+    {inicio:"08:00", fin:"09:30", cliente:"Señora Mayela", estado:"reservada"},
+    {inicio:"09:30", fin:"10:30", cliente:"Gaby", estado:"reservada"},
+    {inicio:"11:00", fin:"13:30", cliente:"Señora Carmen", estado:"reservada"},
+    {inicio:"14:00", fin:"17:00", cliente:"Ashley", estado:"reservada"},
+    {inicio:"18:00", fin:"20:30", cliente:"Hija Profe Alexa", estado:"reservada"}
   ]},
   "2025-12-21": { citas:[
-    {inicio:"09:00", fin:"11:00", cliente:"Profe Yazmora"},
-    {inicio:"12:00", fin:"14:30", cliente:"Mamá de Tania"},
-    {inicio:"15:00", fin:"16:30", cliente:"Señora Cristi"},
-    {inicio:"17:00", fin:"20:00", cliente:"Michael/Michelle y mamá"}
+    {inicio:"09:00", fin:"11:00", cliente:"Profe Yazmora", estado:"reservada"},
+    {inicio:"12:00", fin:"14:30", cliente:"Mamá de Tania", estado:"reservada"},
+    {inicio:"15:00", fin:"16:30", cliente:"Señora Cristi", estado:"reservada"},
+    {inicio:"17:00", fin:"20:00", cliente:"Michael/Michelle y mamá", estado:"reservada"}
   ]},
   "2025-12-22": { citas:[
-    {inicio:"08:00", fin:"11:00", cliente:"Prima de Cris y mamá"},
-    {inicio:"11:00", fin:"13:00", cliente:"Señora Carmen"},
-    {inicio:"13:00", fin:"14:00", cliente:"Dra Lily"},
-    {inicio:"14:00", fin:"15:00", cliente:"Cristi"},
-    {inicio:"15:00", fin:"16:30", cliente:"Viri"},
-    {inicio:"16:30", fin:"17:30", cliente:"Estética canina"},
-    {inicio:"18:00", fin:"19:30", cliente:"Katia Valeria"},
-    {inicio:"20:00", fin:"22:00", cliente:"Leslie"}
+    {inicio:"08:00", fin:"11:00", cliente:"Prima de Cris y mamá", estado:"reservada"},
+    {inicio:"11:00", fin:"13:00", cliente:"Señora Carmen", estado:"reservada"},
+    {inicio:"13:00", fin:"14:00", cliente:"Dra Lily", estado:"reservada"},
+    {inicio:"14:00", fin:"15:00", cliente:"Cristi", estado:"reservada"},
+    {inicio:"15:00", fin:"16:30", cliente:"Viri", estado:"reservada"},
+    {inicio:"16:30", fin:"17:30", cliente:"Estética canina", estado:"reservada"},
+    {inicio:"18:00", fin:"19:30", cliente:"Katia Valeria", estado:"reservada"},
+    {inicio:"20:00", fin:"22:00", cliente:"Leslie", estado:"reservada"}
   ]},
   "2025-12-23": { citas:[
-    {inicio:"08:30", fin:"11:30", cliente:"Cuñada Tania"},
-    {inicio:"13:00", fin:"16:00", cliente:"Cliente"},
-    {inicio:"16:00", fin:"17:00", cliente:"Señora Elena"},
-    {inicio:"17:00", fin:"18:00", cliente:"Señora Cristi"}
+    {inicio:"08:30", fin:"11:30", cliente:"Cuñada Tania", estado:"reservada"},
+    {inicio:"13:00", fin:"16:00", cliente:"Cliente", estado:"reservada"},
+    {inicio:"16:00", fin:"17:00", cliente:"Señora Elena", estado:"reservada"},
+    {inicio:"17:00", fin:"18:00", cliente:"Señora Cristi", estado:"reservada"}
   ]}
 };
 
+// --- CHART LOGIC ---
+let statsChart;
+function updateStats() {
+  const dailyMinutes = toMinutes("23:00") - toMinutes("08:00");
+  const totalMinutesInMonth = dailyMinutes * 31;
+
+  let reservedMinutes = 0;
+  let attendedMinutes = 0;
+  let canceledMinutes = 0;
+
+  for (let i = 1; i <= 31; i++) {
+    const date = `2025-12-${String(i).padStart(2, '0')}`;
+    const dayData = schedule[date];
+    if (dayData && dayData.citas) {
+      dayData.citas.forEach(cita => {
+        const duration = toMinutes(cita.fin) - toMinutes(cita.inicio);
+        if(cita.estado === 'asistida') {
+          attendedMinutes += duration;
+        } else if (cita.estado === 'cancelada') {
+          canceledMinutes += duration;
+        } else { // 'reservada'
+          reservedMinutes += duration;
+        }
+      });
+    }
+  }
+
+  const freeMinutes = totalMinutesInMonth - (reservedMinutes + attendedMinutes + canceledMinutes);
+
+  const data = {
+    labels: ['Citas Reservadas', 'Tiempo Libre', 'Citas Asistidas', 'Citas Canceladas'],
+    datasets: [{
+      label: 'Distribución del Tiempo',
+      data: [reservedMinutes, freeMinutes, attendedMinutes, canceledMinutes],
+      backgroundColor: [
+        'rgba(255, 159, 64, 0.7)', // Naranja para Reservadas
+        'rgba(75, 192, 192, 0.7)', // Verde-azulado para Libre
+        'rgba(54, 162, 235, 0.7)', // Azul para Asistidas
+        'rgba(255, 99, 132, 0.7)'  // Rojo para Canceladas
+      ],
+      borderColor: [
+        'rgba(255, 159, 64, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 99, 132, 1)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  const ctx = document.getElementById('stats-chart').getContext('2d');
+  
+  if(statsChart) {
+    statsChart.destroy();
+  }
+
+  statsChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Distribución de Tiempo en Diciembre'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              let label = context.label || '';
+              if (label) {
+                label += ': ';
+              }
+              const total = context.dataset.data.reduce((acc, val) => acc + val, 0);
+              const value = context.raw;
+              const percentage = ((value / total) * 100).toFixed(2);
+              const hours = (value / 60).toFixed(2);
+              label += `${hours} hrs (${percentage}%)`;
+              return label;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+
+// --- ORIGINAL SCRIPT ---
 // Utilidades de tiempo
 function toMinutes(hhmm){
   const [h,m] = hhmm.split(":").map(Number);
@@ -310,6 +416,10 @@ document.querySelectorAll('.day').forEach(day => {
 function closeModal(){
   document.getElementById('modal').style.display = 'none';
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    updateStats();
+});
 </script>
 </body>
 </html>
