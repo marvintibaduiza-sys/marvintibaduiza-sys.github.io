@@ -94,13 +94,14 @@
 // Citas precargadas
 const schedule = {
   "2025-12-01": { citas:[
-    {inicio:"10:00", fin:"12:00", cliente:"Amiga de Mirel", estado:"reservada"},
-    {inicio:"14:00", fin:"15:30", cliente:"Cliente", estado:"reservada"},
-    {inicio:"19:30", fin:"20:30", cliente:"Dafne", estado:"reservada"}
+    {inicio:"10:00", fin:"12:00", cliente:"Amiga de Mirel", estado:"asistida"},
+    {inicio:"14:00", fin:"15:30", cliente:"Clienta1", estado:"asistida"},
+    {inicio:"15:30", fin:"16:30", cliente:"Cliente Asistió", estado:"asistida"},
+    {inicio:"19:30", fin:"20:30", cliente:"Dafne", estado:"cancelada"}
   ]},
   "2025-12-02": { citas:[
-    {inicio:"19:00", fin:"20:30", cliente:"Alondra", estado:"reservada"},
-    {inicio:"11:00", fin:"12:30", cliente:"Carmen Lara", estado:"reservada"}
+    {inicio:"19:00", fin:"20:30", cliente:"Alondra", estado:"asistida"},
+    {inicio:"11:00", fin:"12:30", cliente:"Carmen Lara", estado:"asistida"}
   ]},
   "2025-12-03": { citas:[
     {inicio:"13:00", fin:"15:00", cliente:"Alondra", estado:"reservada"},
@@ -396,13 +397,26 @@ document.querySelectorAll('.day').forEach(day => {
           const cInicio = toMinutes(c.inicio);
           const cFin = toMinutes(c.fin);
           if (cInicio < bFin && cFin > bInicio) {
-            ocupados.push(c.cliente);
+            ocupados.push({ cliente: c.cliente, estado: c.estado });
           }
         });
       }
 
       if (ocupados.length > 0) {
-        html += `<div class='cita' style="background:#ff7f7f">🟥 ${blockLabel} — ${ocupados.join(', ')}</div>`;
+        const principal = ocupados[0]; // Take the first appointment for styling
+        let style = 'background:rgba(255, 159, 64, 0.7)'; // Default/Reserved (Orange)
+        let estadoLabel = 'Reservada';
+        
+        if (principal.estado === 'asistida') {
+            style = 'background:rgba(54, 162, 235, 0.7)'; // Blue
+            estadoLabel = 'Asistió';
+        } else if (principal.estado === 'cancelada') {
+            style = 'background:rgba(255, 99, 132, 0.7)'; // Red
+            estadoLabel = 'Canceló';
+        }
+
+        const clientes = ocupados.map(o => o.cliente).join(', ');
+        html += `<div class='cita' style="${style}">🟥 ${blockLabel} — ${clientes} (${estadoLabel})</div>`;
       } else {
         html += `<div class='disponible' style="background:#90ee90">🟩 ${blockLabel} — Libre</div>`;
       }
@@ -420,6 +434,9 @@ function closeModal(){
 document.addEventListener('DOMContentLoaded', (event) => {
     updateStats();
 });
+
+// Immediately update stats after defining the new schedule
+updateStats();
 </script>
 </body>
 </html>
